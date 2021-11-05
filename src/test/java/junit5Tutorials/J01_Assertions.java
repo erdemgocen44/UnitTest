@@ -1,7 +1,8 @@
 package junit5Tutorials;
 
-import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,23 +42,36 @@ public class J01_Assertions {
         String expected="BASRİ";
         String actual="basri".toUpperCase();
 
-        assertEquals(actual,expected);
-        assertTrue(actual.equals(expected));
+        assertEquals(actual,expected); //test data esitse passed
+        assertTrue(actual.equals(expected)); //test data true ise passed
         assertFalse(!actual.equals(expected));
-actual=null;
-        assertNull(actual, "actual değer null değildir");
-        actual="Kenan";
-        assertNotNull(actual,"actual deger null");
+
+        actual=null;
+        assertNull(actual,"actual deger null degil"); //parametre null ise Passed
+
+        //assertNotNull(actual, "actual deger null"); -->failed
+        actual="kenan";
+        assertNotNull(actual, "actual deger null");
     }
+
     @Test
     @DisplayName("ToContain Testi")
     void testToContain(){
-        boolean actual ="erdem".contains("hi");//false verir
-
+        boolean actual="erdem".contains("hi"); //false
         boolean expected=false;
 
-        assertEquals(expected,actual,"degerler esit değil");
+        assertEquals(actual,expected, "degerler esit degil"); //actual=false, expected=false --> actual=expected (Passed)
+    }
 
+    @Test
+    @DisplayName("Arrays Testi")
+    void testWithArrays(){
+        String str="junit ile ebik gabik testler";
+        String actual[]=str.split(" "); //{"junit", "ile", "ebik", "gabik","testler"}
+        //String expected[]={"junit", "ile", "ebik", "gabik","testler"};
+        String expected[]={"junit", "ile", "ebik", "gabik","testler"};
+
+        assertArrayEquals(expected, actual,"arrayler esit degil");
 
     }
 }
