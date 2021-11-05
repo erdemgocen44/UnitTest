@@ -65,13 +65,13 @@ public class J01_Assertions {
 
     @Test
     @DisplayName("Arrays Testi")
-    void testWithArrays(){
-        String str="junit ile ebik gabik testler";
-        String actual[]=str.split(" "); //{"junit", "ile", "ebik", "gabik","testler"}
+    void testWithArrays() {
+        String str = "junit ile ebik gabik testler";
+        String actual[] = str.split(" "); //{"junit", "ile", "ebik", "gabik","testler"}
         //String expected[]={"junit", "ile", "ebik", "gabik","testler"};
-        String expected[]={"junit", "ile", "ebik", "gabik","testler"};
+        String expected[] = {"junit", "ile", "ebik", "gabik", "testler"};
 
-        assertArrayEquals(expected, actual,"arrayler esit degil");
+        assertArrayEquals(expected, actual, "arrayler esit degil");
 
     }
 }
