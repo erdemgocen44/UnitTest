@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HesapMakinesiTest {
+class C01_HesapMakinesiTest {
 
     @Test
     @DisplayName("sayilari toplar")//kullanici veya yonetici bilgilendirmesi icin teste etiket olusturur

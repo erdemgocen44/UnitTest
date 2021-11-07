@@ -10,36 +10,43 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class J04_ParametizedTest {
-    //Asla onerilmez kesinlikle yapma ama bil
+    //CISSS  asla onerilmezzzzzz.....
     @Test
-    void uzunlukSifirdenBuyuk() {
+    void uzunlukSifirdanBuyuk() {
         assertTrue("haluk".length() > 0);
         assertTrue("salih".length() > 0);
-        assertTrue("yağmur".length() > 0);
+        assertTrue("yagmur".length() > 0);
         assertTrue("gülcan".length() > 0);
     }
 
     /*
-       lenght() metodunun aşağıdaki koşullar için 0'dan büyük değer döndürüp döndürmediğini test ediniz.
-        Koşullar: ABCD, ABC, A, ABCDE --> bu veriler testi nasıl geçer...
-
-        TEKİL ŞART
-
-   */
+         lenght() metodunun aşağıdaki koşullar için 0'dan büyük değer döndürüp döndürmediğini test ediniz.
+          Koşullar: "haluk", "salih", "yagmur", "gülcan"--> bu veriler testi nasıl geçer...
+     */
+    // TEKİL ŞART
     @ParameterizedTest
     @ValueSource(strings = {"haluk", "salih", "yagmur", "gülcan"})
 //passed
-    void uzunlukSifirdanBuyukParametreli(String str) {//parametre elemanları(strings)method döngü oluşturup run ediyor
-        assertTrue(str.length() > 0);
+    // @ValueSource(strings = {"haluk", "salih", "yagmur","c", "gülcan"})//failed
+    void uzunlukSifirdanBuyukParametreli(String str) {//parametre elemanları (strings)method döngüye atıp run ediyor
+        assertTrue(str.length() > 2);
     }
 
-    //ÇOKLU ŞART---Key-Value ikili parameetre ile çalışır
-    //CSV dosyası(Comma-Separated Variables)Virgülle ayrılmış değerler
-    @ParameterizedTest(name = "(Expected)BUYUKHARF:{0},(actual)cevirilecek:{-1}")//bu mecburi sintax
-    //ParametizedTest-->parametresi{} ile Expected: {0},actual:{1} yazılmalı
-    @CsvFileSource(resources = "/data.csv")
-    void upperCaseFromCsvFile(String kelime, String bykHrf) {
-        assertEquals(bykHrf, kelime.toUpperCase());
+    //COKLU ŞART --> key value ikili parametre ile çalışır
+    //CSV dosyası (Comma-Separated VariabIes) Virgülle ayrılmış değerler
+    @ParameterizedTest(name = "(Expected)BUYUKHARF:{0},(actual)cevirilecek:{1}")//syntax
+    //@ParameterizedTest  --> parametresi {} ile Expected:{0},actual:{1} yazılmalı..
+    @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
+//numLinesToSkip = 1-->1 line 'daki değerleri atla
+    void upperCaseFromCsvFile(String kelime, String buyukHarf) {
+        assertEquals(buyukHarf, kelime.toUpperCase());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"HALUK,haluk","GULCAN,gulcan","HAKAN,hakan"})//passed
+    //@CsvSource(value = {"HALUK,haluk", "GULCAN,gulcan", "H@K@N,hakan"})
+//failed
+    void testBuyukHarfeCevir(String beklenenBuyukHarf, String isim) {
+        assertEquals(beklenenBuyukHarf, isim.toUpperCase());
     }
 }
-
